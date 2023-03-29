@@ -5,6 +5,15 @@
     <div class="row">
         <div class="col-md-12">
             <a href="{{ route('items.create') }}" class=" btn btn-primary mb-3">新規商品追加</a>
+            <!-- 検索機能ここから -->
+            <div>
+                <form method="GET" action="{{ route('search.index') }}">
+                    @csrf
+                    <input type="text" name="keyword">
+                    <input type="submit" value="検索">
+                </form>
+            </div>
+            <!-- 検索機能ここまで -->
             <table class="table table-bordered">
                 <thead class="bg-primary text-white">
                     <tr>
@@ -23,7 +32,7 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->type }}</td>
                         <td>{{ $item->detail }}</td>
-                        <!-- <td>{{ $item->user->name }}</td> -->
+
                         <td>
                             <a href="{{ route('items.edit', $item->id) }}" class="btn btn-primary">編集</a>
                             <form action="{{ route('items.destroy', $item->id) }}" method="POST" style="display:inline;">
@@ -36,6 +45,8 @@
                     @endforeach
                 </tbody>
             </table>
+            <!-- ページネーション -->
+            {{ $posts->links() }}
         </div>
     </div>
 </div>

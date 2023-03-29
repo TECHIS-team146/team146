@@ -13,10 +13,25 @@ class ItemController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::all();
-        return view('items.index', compact('items'));
+        /* テーブルから全てのレコードを取得する */
+        $items = Item::query();
+
+        // キーワード検索処理
+        $keyword = $request->input('keyword');
+
+        //$keywordが空ではない場合、検索処理を実行
+        if (!empty($keyword)) {
+            $items->where('name', 'LIKE', "%{$keyword}%")
+            ->orWhere('type', 'LIKE', "%{$keyword}%");
+            $items->Where('detail', 'LIKE', "%{$keyword}%");
+        }
+
+        /* ページネーション */
+        $posts = $items->paginate(20);
+
+        return view('index', ['items' => $posts]);
     }
 
     public function create()
