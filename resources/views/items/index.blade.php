@@ -7,7 +7,7 @@
             <a href="{{ route('items.create') }}" class=" btn btn-primary mb-3">新規商品追加</a>
             <!-- 検索機能ここから -->
             <div>
-                <form method="GET" action="{{ route('search.index') }}">
+                <form method="GET" action="">
                     @csrf
                     <input type="text" name="keyword">
                     <input type="submit" value="検索">
@@ -68,7 +68,7 @@
                 </tbody>
             </table>
             <!-- ページネーション -->
-            {{ $posts->links() }}
+            {{ $items->links() }}
         </div>
     </div>
 </div>

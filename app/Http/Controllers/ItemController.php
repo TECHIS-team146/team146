@@ -29,9 +29,11 @@ class ItemController extends Controller
         }
 
         /* ページネーション */
-        $posts = $items->paginate(20);
-
-        return view('index', ['items' => $posts]);
+        // $posts = $items->paginate(20);
+        // $items = Item::all();
+        $items = $items->orderBy('id', 'desc')->paginate(20);
+        // ページネーションと商品一覧用の変数をbladeに渡している
+        return view('items.index', ['items' => $items]);
     }
 
     public function create()
@@ -51,7 +53,7 @@ class ItemController extends Controller
         $requestData = $request->all();
     
         // リクエストデータを使用してアイテムを作成
-        auth()->user()->items()->create($requestData);
+        auth()->user()->Item::items()->create($requestData);
     
         return redirect()->route('items.index')->with('success', 'Item created successfully.');
     }
