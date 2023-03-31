@@ -13,10 +13,27 @@ class ItemController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::all();
-        return view('items.index', compact('items'));
+        /* テーブルから全てのレコードを取得する */
+        $items = Item::query();
+
+        // キーワード検索処理
+        $keyword = $request->input('keyword');
+
+        //$keywordが空ではない場合、検索処理を実行
+        if (!empty($keyword)) {
+            $items->where('name', 'LIKE', "%{$keyword}%")
+            ->orWhere('type', 'LIKE', "%{$keyword}%");
+            $items->Where('detail', 'LIKE', "%{$keyword}%");
+        }
+
+        /* ページネーション */
+        // $posts = $items->paginate(20);
+        // $items = Item::all();
+        $items = $items->orderBy('id', 'desc')->paginate(20);
+        // ページネーションと商品一覧用の変数をbladeに渡している
+        return view('items.index', ['items' => $items]);
     }
 
     public function create()
@@ -36,7 +53,7 @@ class ItemController extends Controller
         $requestData = $request->all();
     
         // リクエストデータを使用してアイテムを作成
-        auth()->user()->items()->create($requestData);
+        auth()->user()->Item::items()->create($requestData);
     
         return redirect()->route('items.index')->with('success', 'Item created successfully.');
     }

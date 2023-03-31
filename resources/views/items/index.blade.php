@@ -5,6 +5,15 @@
     <div class="row">
         <div class="col-md-12">
             <a href="{{ route('items.create') }}" class=" btn btn-primary mb-3">新規商品追加</a>
+            <!-- 検索機能ここから -->
+            <div>
+                <form method="GET" action="">
+                    @csrf
+                    <input type="text" name="keyword">
+                    <input type="submit" value="検索">
+                </form>
+            </div>
+            <!-- 検索機能ここまで -->
             <table class="table table-bordered table-fixed">
                 <thead class="bg-primary text-white">
                     <tr>
@@ -21,10 +30,12 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->type }}</td>
+
                         <td class="detail-cell">
                             <span class="detail-text">{{ Str::limit($item->detail, 20, '...') }}</span>
                             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">詳細</button>
                         </td>
+
                         <td>
                             <a href="{{ route('items.edit', $item->id) }}" class="btn btn-primary">編集</a>
                             <form action="{{ route('items.destroy', $item->id) }}" method="POST" style="display:inline;">
@@ -56,6 +67,8 @@
                     @endforeach
                 </tbody>
             </table>
+            <!-- ページネーション -->
+            {{ $items->links() }}
         </div>
     </div>
 </div>

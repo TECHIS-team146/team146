@@ -16,10 +16,10 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [ItemController::class, 'index']); 
+Route::get('/', [HomeController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('items', ItemController::class);
+Route::resource('items', ItemController::class); /* 一覧表示 */
