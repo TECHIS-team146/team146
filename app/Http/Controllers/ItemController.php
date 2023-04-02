@@ -24,6 +24,7 @@ class ItemController extends Controller
         //$keywordが空ではない場合、検索処理を実行
         if (!empty($keyword)) {
             $items->where('name', 'LIKE', "%{$keyword}%")
+            ->orWhere('id', 'LIKE', "%{$keyword}%")
             ->orWhere('type', 'LIKE', "%{$keyword}%")
             ->orWhere('detail', 'LIKE', "%{$keyword}%");
         }
