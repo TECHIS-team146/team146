@@ -74,11 +74,116 @@
   --bs-highlight-bg: #fff3cd;
 }
 
+/* ホーム画面のアニメーション */
+
+/* 一つ目のアニメーション */
+#animated-text {
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .15em solid ;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    animation: typing 3s steps(50, end),blink-caret .5s step-end infinite;
+}
+
+
+/* 二つ目のアニメーション */
+.animation-typing-2 {
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .15em solid;
+    font-size: 18px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    animation: typing-2 3s steps(30, end), blink-caret-2 .5s step-end infinite;
+}
+
+/* アニメーションの定義 */
+@keyframes typing {
+    from {
+        opacity: 0;
+        width: 0; 
+    }
+    to { 
+        opacity: 1;
+        width: 100% }
+    }
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: gray }
+}
+
+@keyframes typing-2 {
+    from { opacity: 0; width: 0 }
+    to { opacity: 1; width: 100% }
+}
+
+@keyframes blink-caret-2 {
+    from, to { border-color: transparent }
+    50% { border-color: gray }
+}
+/* ここまで */
+
+
+
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
+/* Itemlayout */
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    background-color: #f8fafc;
+    border-right: 1px solid #dee2e6;
+}
+
+.main-content {
+    margin-left: 200px;
+    background-color: #f8fafc;
+}
+
+.table-fixed {
+table-layout: fixed;
+}
+
+.detail-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.detail-text {
+    margin-right: 5px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: center;
+}
+.modal-title {
+    margin-right: 30px;
+}
+
+
+
+/* ここまで */
+
+
+
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   :root {
