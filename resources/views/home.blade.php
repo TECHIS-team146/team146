@@ -13,27 +13,28 @@
 </div>
 
 <script>
-// ユーザー名を取得してアニメーションする
+// JavaScript
 const username = '{{ $username }}';
 const animatedText = document.getElementById('animated-text');
 const animatedText2 = document.getElementById('animated-text-2');
 animatedText.textContent = `ようこそ${username}さん、こちらはホーム画面です。`;
 animatedText.classList.add('animation-typing');
 
-// 一つ目のアニメーションが終わったら二つ目のアニメーションを開始する
 animatedText.addEventListener('animationend', () => {
     animatedText.classList.remove('animation-typing');
     animatedText.style.borderRight = 'none';
+    animatedText.style.whiteSpace = 'normal';
     animatedText2.style.opacity = 1;
     animatedText2.textContent = 'もし、商品の一覧が確認したいならサイドバーの商品一覧を押してください。';
     animatedText2.classList.add('animation-typing-2');
 });
 
-// 二つ目のアニメーションが終わったらカーソルを消す
 animatedText2.addEventListener('animationend', () => {
     animatedText2.style.borderRight = 'none';
+    animatedText2.style.whiteSpace = 'normal';
 });
-
-
 </script>
+
+
+
 @endsection

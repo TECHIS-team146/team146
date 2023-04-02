@@ -74,6 +74,12 @@
   --bs-highlight-bg: #fff3cd;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /* ホーム画面のアニメーション */
 
 /* 一つ目のアニメーション */
@@ -129,16 +135,94 @@
 }
 /* ここまで */
 
-
-
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* ホームアニメーション スマホ用 */
+@media (max-width: 767px) {
+#animated-text,
+#animated-text-2 {
+  white-space: nowrap;
+  overflow: hidden;
+  color: #333;
 }
 
+#animated-text {
+  font-size: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+}
+
+#animated-text-2 {
+  font-size: 18px;
+}
+
+.animation-typing {
+  border-right: .15em solid;
+  animation: typing 3s steps(50, end), blink-caret .5s step-end infinite;
+}
+
+.animation-typing-2 {
+  border-right: .15em solid;
+  animation: typing-2 3s steps(30, end), blink-caret-2 .5s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    opacity: 0;
+    width: 0;
+  }
+  to {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+@keyframes typing-2 {
+  from {
+    opacity: 0;
+    width: 0;
+  }
+  to {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: gray;
+  }
+}
+
+@keyframes blink-caret-2 {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: gray;
+  }
+}
+}
+/* ここまで */
+
+
 /* Itemlayout */
+
+.item-system {
+  background-color: #ff495a;
+  padding: 17% 0%;
+  display: block;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+  }
+
 
 .sidebar {
     width: 200px;
@@ -176,13 +260,71 @@ table-layout: fixed;
     margin-right: 30px;
 }
 
-
-
 /* ここまで */
 
+/* レイアウトのスマホデザイン */
+@media (max-width: 767px) {
+  .sidebar {
+  position: static;
+  width: 100%;
+  height: auto;
+  border-right: none;
+  margin-bottom: 1rem;
+  text-align: center;
+  }
+  
+  .item-system {
+  padding: 4% 0%;
+  font-size: 18px;
+  }
+  
+  .main-content {
+  margin-left: 0;
+  padding: 0 1rem;
+  }
+  
+  .detail-cell {
+  display: block;
+  white-space: normal;
+  }
+  
+  .detail-text {
+  margin-right: 0;
+  margin-bottom: 0.5rem;
+  }
+  
+  .modal-title {
+  margin-right: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-toggler {
+    position: absolute;
+    right: 10px;
+  }
+}
 
 
 
+  @media screen and (max-width: 767px) {
+    .detail-cell {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .detail-cell .detail-text {
+      margin-bottom: 10px;
+    }
+  
+    .detail-cell .small-button {
+      font-size: 12px !important;
+      padding: 5px 10px !important;
+      align-self: flex-end;
+    }
+
+  }
+/* ここまで */
 
 
 @media (prefers-reduced-motion: no-preference) {

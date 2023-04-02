@@ -21,23 +21,14 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3v8j92/xx1iYh/Jdr" crossorigin="anonymous">
 
-<style>
-    .item-system {
-        background-color: #ff495a;
-    padding: 17% 0%;
-    display: block;
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    }
-</style>
+
 
 </head>
 <body>
     <div id="app">
         <div class="sidebar">
             <div>
-                <a class="navbar-brand item-system" href="{{ route('home') }}">{{ config('app.name', '商品管理システム') }}</a>
+                <a class="item-system" href="{{ route('home') }}">{{ config('app.name', '商品管理システム') }}</a>
             </div>
             <div>
             <a class="navbar-brand" href="{{ route('items.index') }}">
