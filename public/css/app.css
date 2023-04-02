@@ -303,6 +303,12 @@ table-layout: fixed;
     position: absolute;
     right: 10px;
   }
+
+  .navbar-nav {
+    position: absolute;
+    right: 80px;
+
+  }
 }
 
 

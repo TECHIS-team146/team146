@@ -25,7 +25,7 @@ animatedText.addEventListener('animationend', () => {
     animatedText.style.borderRight = 'none';
     animatedText.style.whiteSpace = 'normal';
     animatedText2.style.opacity = 1;
-    animatedText2.textContent = 'もし、商品の一覧が確認したいならサイドバーの商品一覧を押してください。';
+    animatedText2.innerHTML = 'もし、商品の一覧が確認したいなら<a href="{{ route("items.index") }}">商品一覧</a>を押してください。';
     animatedText2.classList.add('animation-typing-2');
 });
 
