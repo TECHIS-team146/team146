@@ -24,8 +24,9 @@ class ItemController extends Controller
         //$keywordが空ではない場合、検索処理を実行
         if (!empty($keyword)) {
             $items->where('name', 'LIKE', "%{$keyword}%")
-            ->orWhere('type', 'LIKE', "%{$keyword}%");
-            $items->Where('detail', 'LIKE', "%{$keyword}%");
+            ->orWhere('id', 'LIKE', "%{$keyword}%")
+            ->orWhere('type', 'LIKE', "%{$keyword}%")
+            ->orWhere('detail', 'LIKE', "%{$keyword}%");
         }
 
         /* ページネーション */
@@ -53,8 +54,8 @@ class ItemController extends Controller
         $requestData = $request->all();
     
         // リクエストデータを使用してアイテムを作成
-        auth()->user()->Item::items()->create($requestData);
-    
+        auth()->user()->items()->create($requestData); 
+            
         return redirect()->route('items.index')->with('success', 'Item created successfully.');
     }
 

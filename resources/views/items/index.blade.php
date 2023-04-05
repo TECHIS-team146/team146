@@ -4,9 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('items.create') }}" class=" btn btn-primary mb-3">新規商品追加</a>
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{{ route('items.create') }}" class="btn btn-primary">新規商品追加</a>
+            </div>
             <!-- 検索機能ここから -->
-            <div>
+            <div class="d-flex justify-content-end mb-3">
                 <form method="GET" action="">
                     @csrf
                     <input type="text" name="keyword">
@@ -17,7 +19,7 @@
             <table class="table table-bordered table-fixed">
                 <thead class="bg-primary text-white">
                     <tr>
-                        <th>ID</th>
+                        <th style="width: 50px;">ID</th>
                         <th>名前</th>
                         <th>種別</th>
                         <th>詳細</th>
@@ -31,17 +33,17 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->type }}</td>
 
-                        <td class="detail-cell">
+                        <td class="detail-cell ">
                             <span class="detail-text">{{ Str::limit($item->detail, 20, '...') }}</span>
-                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">詳細</button>
+                            <button type="button" class="btn btn-info small-button" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">詳細</button>
                         </td>
 
-                        <td>
-                            <a href="{{ route('items.edit', $item->id) }}" class="btn btn-primary">編集</a>
+                        <td >
+                            <a href="{{ route('items.edit', $item->id) }}" class=" btn btn-primary small-button">編集</a>
                             <form action="{{ route('items.destroy', $item->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">削除</button>
+                                <button type="submit" onclick="return confirm('本当に削除しますか？')" class="btn btn-danger small-button">削除</button>
                             </form>
                         </td>
                     </tr>
@@ -68,7 +70,9 @@
                 </tbody>
             </table>
             <!-- ページネーション -->
-            {{ $items->links() }}
+            <div class="d-flex justify-content-center">
+                {{ $items->links() }}
+            </div>
         </div>
     </div>
 </div>
