@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Item;
 
+use Illuminate\Support\Facades\Gate;
+
 class ItemController extends Controller
 {
     public function __construct()
@@ -24,9 +26,9 @@ class ItemController extends Controller
         //$keywordが空ではない場合、検索処理を実行
         if (!empty($keyword)) {
             $items->where('name', 'LIKE', "%{$keyword}%")
-            ->orWhere('id', 'LIKE', "%{$keyword}%")
-            ->orWhere('type', 'LIKE', "%{$keyword}%")
-            ->orWhere('detail', 'LIKE', "%{$keyword}%");
+                ->orWhere('id', 'LIKE', "%{$keyword}%")
+                ->orWhere('type', 'LIKE', "%{$keyword}%")
+                ->orWhere('detail', 'LIKE', "%{$keyword}%");
         }
 
         /* ページネーション */
@@ -39,7 +41,9 @@ class ItemController extends Controller
 
     public function create()
     {
-        return view('items.create');
+        if (Gate::allows('admin')) {
+            return view('items.create');
+        }
     }
 
     public function store(Request $request)
@@ -49,19 +53,21 @@ class ItemController extends Controller
             'type' => 'required|max:255',
             'detail' => 'nullable|max:500',
         ]);
-    
+
         // 現在のリクエストデータを取得し、user_id を追加
         $requestData = $request->all();
-    
+
         // リクエストデータを使用してアイテムを作成
-        auth()->user()->items()->create($requestData); 
-            
+        auth()->user()->items()->create($requestData);
+
         return redirect()->route('items.index')->with('success', 'Item created successfully.');
     }
 
     public function edit(Item $item)
     {
-        return view('items.edit', compact('item'));
+        if (Gate::allows('admin')) {
+            return view('items.edit', compact('item'));
+        }
     }
 
     public function update(Request $request, Item $item)
@@ -73,12 +79,18 @@ class ItemController extends Controller
         ]);
 
         $item->update($request->all());
-        return redirect()->route('items.index')->with('success', 'Item updated successfully.');
+
+        if (Gate::allows('admin')) {
+            $item->update($request->all());
+            return redirect()->route('items.index')->with('success', 'Item updated successfully.');
+        }
     }
 
     public function destroy(Item $item)
     {
-        $item->delete();
-        return redirect()->route('items.index')->with('success', 'Item deleted successfully.');
+        if (Gate::allows('admin')) {
+            $item->delete();
+            return redirect()->route('items.index')->with('success', 'Item deleted successfully.');
+        }
     }
 }

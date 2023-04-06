@@ -23,3 +23,10 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('items', ItemController::class); /* 一覧表示 */
+
+Route::group(['middleware' => ['auth', 'can:admin']], function () {
+    Route::get('items/create', [ItemController::class, 'create'])->name('items.create');
+    Route::get('items/edit/{id}', [ItemController::class, 'edit'])->name('items.edit');
+    Route::post('update', [ItemController::class, 'update'])->name('items.update');
+    Route::post('delete/{id}', [ItemController::class, 'delete'])->name('delete');
+});
