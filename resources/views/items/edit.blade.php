@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <label for="detail">詳細</label>
-                    <textarea class="form-control" id="detail" name="detail" rows="3">{{ $item->detail }}</textarea>
+                    <textarea class="form-control" id="detail" name="detail" rows="3" >{{ $item->detail }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">更新</button>
             </form>
@@ -26,3 +26,4 @@
     </div>
 </div>
 @endsection
+
