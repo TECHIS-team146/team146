@@ -78,8 +78,6 @@ class ItemController extends Controller
             'detail' => 'nullable|max:500',
         ]);
 
-        $item->update($request->all());
-
         if (Gate::allows('admin')) {
             $item->update($request->all());
             return redirect()->route('items.index')->with('success', 'Item updated successfully.');

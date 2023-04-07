@@ -26,7 +26,7 @@ Route::resource('items', ItemController::class); /* 一覧表示 */
 
 Route::group(['middleware' => ['auth', 'can:admin']], function () {
     Route::get('items/create', [ItemController::class, 'create'])->name('items.create');
-    Route::get('items/edit/{id}', [ItemController::class, 'edit'])->name('items.edit');
-    Route::post('update', [ItemController::class, 'update'])->name('items.update');
-    Route::post('delete/{id}', [ItemController::class, 'delete'])->name('delete');
+    Route::get('items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
+    Route::put('items/{item}', [ItemController::class, 'update'])->name('items.update');
+    Route::delete('items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
 });
