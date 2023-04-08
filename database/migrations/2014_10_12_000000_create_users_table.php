@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id()->index('id')->comment('ID');
             $table->string('name',100)->index('name')->comment('名前');
-            $table->string('email',255)->index('email')->unique()->comment('メールアドレス');
+            $table->string('email',100)->index('email')->charset("utf8")->unique()->comment('メールアドレス');
             $table->timestamp('email_verified_at')->nullable()->comment('メールアドレス確認日時');
             $table->string('password',255)->comment('パスワード');
             $table->tinyInteger('role')->default(0)->comment('権限タイプ（０が一般、１が管理者');
