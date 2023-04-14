@@ -26,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
         \Illuminate\Pagination\Paginator::useBootstrap();
         Schema::defaultStringLength(191);
+
+        if (\App::environment(['production']) || \App::environment(['develop'])){
+            \URL::forceScheme('https');}
     }
 }
